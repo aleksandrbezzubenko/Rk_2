@@ -60,3 +60,11 @@ bool Empty(const Queue& queue)
         return false;
     }
 }
+Node* front()
+{
+    return this->Head;
+}
+Node* back()
+{
+    return this->Tail;
+}
