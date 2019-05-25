@@ -96,7 +96,8 @@ void Tree<T>::deleteNode(Node<T> *&node) {
 		node->key = tmp->key;
 		if(prev == node)
 			prev->left = tmp->left;
-		else prev->right = tmp->left;
+		else 
+			prev->right = tmp->left;
 	}
 	delete tmp;
 }
