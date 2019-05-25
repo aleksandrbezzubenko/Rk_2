@@ -29,12 +29,12 @@ public:
 	void inorder() { inorder(root); }
 	void insert(const T& el);
 	void deleteNode(Node<T> *& node);
+	Node<T> *TreeMax(Node<T> *node);
+	Node<T> *TreeMin(Node<T> *node);
 
 protected:
 	Node<T> *root;
 
-	void clear(Node<T> *p);
-	void inorder(Node<T> *p);
 
 };
 
@@ -58,11 +58,6 @@ void Tree<T>::clear() {
         root = nullptr;
         TNULL = nullptr;
         size_ = 0;
-}
-
-template<class T>
-void Tree<T>::inorder(Node<T> *p) {
-	//TO DO! This is for an inorder tree traversal!
 }
 
 template<class T>
@@ -104,16 +99,17 @@ void Tree<T>::deleteNode(Node<T> *&node) {
 	}
 	delete tmp;
 }
-
-Node *TreeMin(Node *node) {
-    Node* it = node;
+template<class T>
+Node Tree<T>::*TreeMin(Node<T> *node) {
+    Node<T>* it = node;
     while (it->Left->Left != nullptr) {
         it = it->Left;
     }
     return it;
 }
-Node *TreeMax(Node *node) {
-    Node* it = node;
+template<class T>
+Node Tree<T>::*TreeMax(Node<T> *node) {
+    Node<T>* it = node;
     while (it->Right->Right != nullptr) {
          it = it->Right;
     }
