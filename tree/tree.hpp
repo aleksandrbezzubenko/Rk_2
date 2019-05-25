@@ -50,7 +50,8 @@ void Tree<T>::DeleteTree(Node* treeRoot)
     }
 
 template<class T>
-void Tree<T>::clear() {
+void Tree<T>::clear() 
+{
         if (root != nullptr)
             DeleteTree(root);
         if (TNULL != nullptr)
