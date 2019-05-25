@@ -1,70 +1,70 @@
 // Copyright 2018 Your Name <your_email>
 #include "queue.hpp"
-void Construct(Queue& queue)
+Queue::Queue()
 {
-    queue.Head = nullptr;
-    queue.Tail = nullptr;
+    Head = nullptr;
+    Tail = nullptr;
 }
-void Destruct(Queue& queue)
+Queue::~Queue()
 {
-    while ((queue.Head != nullptr) && (queue.Tail != nullptr)) {
-        Queue::Node* tmp = queue.Head;
-        if (queue.Head == queue.Tail) {
-            queue.Tail = nullptr;
+    while ((Head != nullptr) && (Tail != nullptr)) {
+        Node* tmp = Head;
+        if (Head == Tail) {
+            Tail = nullptr;
         }
-        queue.Head = queue.Head->Next;
+        Head = Head->Next;
         delete tmp;
     }
-    queue.Head = nullptr;
-    queue.Tail = nullptr;
+    Head = nullptr;
+    Tail = nullptr;
 }
-void Push(Queue& queue, int value)
+void Queue::Push(int value)
 {
-    Queue::Node* tmp = new Queue::Node();
-    Queue::Node* pred;
+    Node* tmp = new Node();
+    Node* pred;
     tmp->Data = value;
-    if (!Empty(queue))
+    if (!this->Empty())
     {
-        pred = queue.Head;
+        pred = Head;
         while (pred->Next != nullptr) {
             pred = pred->Next;
         }
         pred->Next = tmp;
     } else {
-        queue.Head = tmp;
+        Head = tmp;
     }
-    queue.Tail = tmp;
+    Tail = tmp;
 }
-int Pop(Queue& queue)
+int Queue::Pop()
 {
-    if ((queue.Head == nullptr) && (queue.Tail == nullptr)) {
+    if ((Head == nullptr) && (Tail == nullptr)) {
         return 0;
     }
-    int dt = queue.Head->Data;
-    if (queue.Head != nullptr)
+    int dt = Head->Data;
+    if (Head != nullptr)
     {
-        Queue::Node* Node = queue.Head;
-        if (queue.Head == queue.Tail) {
-            queue.Tail = nullptr;
+        Node* Node = Head;
+        if (Head == Tail) {
+            Tail = nullptr;
         }
-        queue.Head = queue.Head->Next;
+        Head = Head->Next;
         delete Node;
     }
     return dt;
 }
-bool Empty(const Queue& queue)
+bool Queue::Empty()
 {
-    if ((queue.Head == nullptr) && (queue.Tail == nullptr)) {
+    if ((Head == nullptr) && (Tail == nullptr)) {
         return true;
     } else {
         return false;
     }
 }
-Node* front()
+Node* Queue::front()
 {
     return this->Head;
 }
-Node* back()
+Node* Queue::back()
 {
     return this->Tail;
 }
