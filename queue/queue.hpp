@@ -3,7 +3,8 @@
 #ifndef INCLUDE_QUEUE_HPP_
 #define INCLUDE_QUEUE_HPP_
 
-struct Queue {
+class Queue {
+private:
   struct Node {
     Node* Next = nullptr;
     int Data = 0;
@@ -14,13 +15,15 @@ struct Queue {
 
   // Указатель на последний элемент очереди.
   Node* Tail = nullptr;
+public:
+  Queue();
+  ~Queue();
+  void Push(int value);
+  int Pop();
+  bool Empty();
+  Node* front();
+  Node* back();
 };
 
-void Construct(Queue& queue);
-void Destruct(Queue& queue);
-
-void Push(Queue& queue, int value);
-int Pop(Queue& queue);
-bool Empty(const Queue& queue);
 
 #endif  // INCLUDE_QUEUE_HPP_
