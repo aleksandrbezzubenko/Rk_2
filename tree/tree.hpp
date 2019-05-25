@@ -23,6 +23,7 @@ class Tree {
 public:
 	Tree() { root = 0; }
 	~Tree() { clear(); }
+	void DeleteTree(Node* treeRoot)
 	void clear() { clear(root); root = 0; }
 	bool isEmpty() { return root == 0; }
 	void inorder() { inorder(root); }
@@ -38,13 +39,25 @@ protected:
 };
 
 template<class T>
-void Tree<T>::clear(Node<T> *p)
-{
-	if (p != 0) {
-	     clear(p->left);
-	     clear(p->right);
-	     delete p;
-	}
+void Tree<T>::DeleteTree(Node* treeRoot)
+    {
+        if (treeRoot != nullptr)
+        {
+            DeleteTree(treeRoot->left);
+            DeleteTree(treeRoot->right);
+            delete treeRoot;
+        }
+    }
+
+template<class T>
+void Tree<T>::clear() {
+        if (root != nullptr)
+            DeleteTree(root);
+        if (TNULL != nullptr)
+            delete TNULL;
+        root = nullptr;
+        TNULL = nullptr;
+        size_ = 0;
 }
 
 template<class T>
@@ -90,6 +103,21 @@ void Tree<T>::deleteNode(Node<T> *&node) {
 		else prev->right = tmp->left;
 	}
 	delete tmp;
+}
+
+Node *TreeMin(Node *node) {
+    Node* it = node;
+    while (it->Left->Left != nullptr) {
+        it = it->Left;
+    }
+    return it;
+}
+Node *TreeMax(Node *node) {
+    Node* it = node;
+    while (it->Right->Right != nullptr) {
+         it = it->Right;
+    }
+    return it;
 }
 
 #endif // Binary_Search_Tree
